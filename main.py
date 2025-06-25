@@ -127,4 +127,12 @@ def show_patient_locations(self):
     pass
 
 # Rozszerzenie klasy PunktSzczepien o nowe metody
+def on_marker_click(self):
+    # Obsługa kliknięcia w marker punktu szczepień
+    win = Toplevel(root)
+    win.title(f"{self.nazwa} - Wybierz listę")
+    Button(win, text="Pokaż pracowników", command=lambda: self.show_worker_locations()).pack()
+    Button(win, text="Pokaż pacjentów", command=lambda: self.show_patient_locations()).pack()
+
+# Aktualizacja GUI o dodatkowe przyciski i funkcje
 root.mainloop()
