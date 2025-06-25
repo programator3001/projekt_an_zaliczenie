@@ -105,4 +105,18 @@ class Pacjent:
         else:
             return [52.23, 21.01]
 
+        def open_pracownicy_window(punkt_szczepien):
+            # Okno do zarządzania pracownikami
+            pass
+
+        def open_pacjenci_window(punkt_szczepien):
+            # Okno do zarządzania pacjentami
+            pass
+
+        # Dodaj przyciski do GUI
+        Button(ramka_lista, text="Pracownicy", command=lambda: open_pracownicy_window(active_punkt_szczepien)).grid(
+            row=3, column=0)
+        Button(ramka_lista, text="Pacjenci", command=lambda: open_pacjenci_window(active_punkt_szczepien)).grid(row=3,
+                                                                                                                column=1)
+
 root.mainloop()
