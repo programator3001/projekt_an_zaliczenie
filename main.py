@@ -118,5 +118,13 @@ class Pacjent:
             row=3, column=0)
         Button(ramka_lista, text="Pacjenci", command=lambda: open_pacjenci_window(active_punkt_szczepien)).grid(row=3,
                                                                                                                 column=1)
+def show_worker_locations(self):
+    # Wyświetlanie markerów pracowników na mapie
+    pass
 
+def show_patient_locations(self):
+    # Wyświetlanie markerów pacjentów na mapie
+    pass
+
+# Rozszerzenie klasy PunktSzczepien o nowe metody
 root.mainloop()
