@@ -29,4 +29,44 @@ map_widget.set_position(52.23, 21.0)
 map_widget.set_zoom(6)
 map_widget.grid(row=0, column=0, columnspan=3)
 
+class PunktSzczepien:
+    def __init__(self, nazwa, ulica, miejscowosc, nr_budynku):
+        self.nazwa = nazwa
+        self.ulica = ulica
+        self.miejscowosc = miejscowosc
+        self.nr_budynku = nr_budynku
+        self.coordinates = self.get_coordinates()
+        self.marker = map_widget.set_marker(
+            self.coordinates[0], self.coordinates[1],
+            text=self.nazwa
+        )
+
+    def get_coordinates(self):
+        geolocator = Nominatim(user_agent="mapbook_ak")
+        address = f"{self.ulica} {self.nr_budynku}, {self.miejscowosc}, Polska"
+        location = geolocator.geocode(address)
+        if location:
+            return [location.latitude, location.longitude]
+        else:
+            return [52.23, 21.01]  # Warszawa fallback
+
+# Funkcje CRUD dla punktów szczepień
+def dodaj_punkt_szczepien():
+    nazwa = entry_nazwa.get()
+    ulica = entry_ulica.get()
+    miejscowosc = entry_miejscowosc.get()
+    nr = entry_nr_budynku.get()
+
+    punkt = PunktSzczepien(nazwa, ulica, miejscowosc, nr)
+    punkty_szczepien_list.append(punkt)
+    pokaz_liste_punktow_szczepien()
+
+def pokaz_liste_punktow_szczepien():
+    listbox_punkty_szczepien.delete(0, END)
+    for i, punkt in enumerate(punkty_szczepien_list):
+        listbox_punkty_szczepien.insert(i, f"{i + 1}. {punkt.nazwa}, {punkt.ulica}")
+
+# Dodaj te funkcje do GUI
+Button(ramka_lista, text="Dodaj punkt", command=dodaj_punkt_szczepien).grid(row=2, column=0)
+
 root.mainloop()
