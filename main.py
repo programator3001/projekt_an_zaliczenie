@@ -69,4 +69,40 @@ def pokaz_liste_punktow_szczepien():
 # Dodaj te funkcje do GUI
 Button(ramka_lista, text="Dodaj punkt", command=dodaj_punkt_szczepien).grid(row=2, column=0)
 
+class Pracownik:
+    def __init__(self, imie, nazwisko, ulica, miejscowosc, nr_budynku):
+        self.imie = imie
+        self.nazwisko = nazwisko
+        self.ulica = ulica
+        self.miejscowosc = miejscowosc
+        self.nr_budynku = nr_budynku
+        self.coordinates = self.get_coordinates()
+
+    def get_coordinates(self):
+        geolocator = Nominatim(user_agent="mapbook_ak")
+        address = f"{self.ulica} {self.nr_budynku}, {self.miejscowosc}, Polska"
+        location = geolocator.geocode(address)
+        if location:
+            return [location.latitude, location.longitude]
+        else:
+            return [52.23, 21.01]
+
+class Pacjent:
+    def __init__(self, imie, nazwisko, ulica, miejscowosc, nr_budynku):
+        self.imie = imie
+        self.nazwisko = nazwisko
+        self.ulica = ulica
+        self.miejscowosc = miejscowosc
+        self.nr_budynku = nr_budynku
+        self.coordinates = self.get_coordinates()
+
+    def get_coordinates(self):
+        geolocator = Nominatim(user_agent="mapbook_ak")
+        address = f"{self.ulica} {self.nr_budynku}, {self.miejscowosc}, Polska"
+        location = geolocator.geocode(address)
+        if location:
+            return [location.latitude, location.longitude]
+        else:
+            return [52.23, 21.01]
+
 root.mainloop()
